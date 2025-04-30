@@ -1,0 +1,38 @@
+{
+  "os": "Linux-6.14.2-arch1-1-x86_64-with-glibc2.41",
+  "python": "CPython 3.12.7",
+  "startedAt": "2025-04-30T02:18:39.991033Z",
+  "program": "/run/media/seono/P/Sequence/fine_tune.ipynb",
+  "codePath": "fine_tune.ipynb",
+  "email": "bluesky5april2021@gmail.com",
+  "root": "/run/media/seono/P/Sequence",
+  "host": "archlinux",
+  "executable": "/home/seono/anaconda3/bin/python",
+  "codePathLocal": "fine_tune.ipynb",
+  "cpu_count": 8,
+  "cpu_count_logical": 16,
+  "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "117768318976",
+      "used": "102707576832"
+    }
+  },
+  "memory": {
+    "total": "16146866176"
+  },
+  "cpu": {
+    "count": 8,
+    "countLogical": 16
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 3050 Laptop GPU",
+      "memoryTotal": "4294967296",
+      "cudaCores": 2048,
+      "architecture": "Ampere"
+    }
+  ],
+  "cudaVersion": "12.8"
+}
