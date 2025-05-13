@@ -97,6 +97,11 @@ class Encoder_Decoder_MultiHead_Attention(nn.Module):
 #   embed_dim
 #   num_heads       embed_dim % num_heads == 0
 
+class LinearAttention(nn.Module):
+    def __init__(self, model_dim):
+        super(LinearAttention, self).__init__()
+        self.model_dim = model_dim
+        
 
 class MultiHeadAttention(nn.Module):
     def __init__(self, config):
