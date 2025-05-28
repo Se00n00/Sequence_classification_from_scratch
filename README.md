@@ -1,6 +1,8 @@
 # Transformer from Scratch for Emotion Classification
 
-This repository demonstrates a **Transformer-based sequence classification model built from scratch** in PyTorch. The model is fine-tuned on the [`tweet_eval`](https://huggingface.co/datasets/tweet_eval) dataset for **emotion classification**, including labels like *anger, joy, optimism, sadness, fear,* and *love*.
+This repository demonstrates a **Transformer-based sequence classification model built from scratch** in PyTorch. The model is pre-trained on the [`tweet_eval`](https://huggingface.co/datasets/tweet_eval) dataset for **emotion classification**, including labels like *anger, joy, optimism, sadness, fear,* and *love*.
+
+Further, this model is fine-tuned on the [`Amazaon Review Sentiment`](https://huggingface.co/datasets/hungnm/multilingual-amazon-review-sentiment-processed) dataset for **binary classification** including labels as *negative and positive*
 
 ---
 
