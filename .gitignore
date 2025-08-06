@@ -1,7 +1,9 @@
+.vscode
 model_weights.pt
 sequence_classifier.onnx
 # best_model.pt*.pyc
 __pycache__/
 
+text.ipynb
 wandb/
 tweet_emotion_model/
