@@ -1,6 +1,5 @@
 .vscode
 model_weights.pt
-sequence_classifier.onnx
 # best_model.pt*.pyc
 __pycache__/
 
