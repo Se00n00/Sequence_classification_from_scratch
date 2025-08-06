@@ -62,3 +62,22 @@ You can save the model using:
 ```python
 torch.save(model.state_dict(), "best_model.pt")
 ```
+
+## API Usage
+
+Check if API is Healthy
+```bash
+curl -X GET https://sequence-classification-8jnb.onrender.com
+```
+```bash
+{"message":"Sentiment analysis model is up and running! Have a great Day XD"}%                                     
+```
+Example Usage
+```bash
+curl -X POST https://sequence-classification-8jnb.onrender.com/predict \
+  -H "Content-Type: application/json" \
+  -d '{"review": "This product is amazing!"}'
+```
+```bash
+{"Negative":0.00019336487457621843,"Positive":0.9998067021369934}
+```
