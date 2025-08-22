@@ -46,7 +46,7 @@ def predict_sentiment(request: ReviewRequest):
         }
 
         logits = session.run(None, inputs)[0]
-        probs = softmax(logits[0])
+        probs = logits[0]
 
         return {
             "Negative": float(probs[0]),
@@ -72,8 +72,8 @@ def predict_sentiments(request: BatchReviewRequest):
         }
 
         logits = session.run(None, inputs)[0]
-        probs = softmax_2d(logits)
-
+        #probs = softmax_2d(logits)
+        probs = logits
         predictions = [
             {
                 "Negative": float(p[0]),
