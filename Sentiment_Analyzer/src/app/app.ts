@@ -25,7 +25,7 @@ export class App implements OnInit, OnDestroy {
   ngOnInit() {
     this.statusSubscription = interval(5000) // Check every 5 seconds
       .pipe(
-        switchMap(() => this.http.get("/", { observe: 'response', responseType: 'text' })
+        switchMap(() => this.http.get("https://sequence-classification-from-scratch.onrender.com", { observe: 'response', responseType: 'text' })
           .pipe(
             catchError(() => of(null))
           )
