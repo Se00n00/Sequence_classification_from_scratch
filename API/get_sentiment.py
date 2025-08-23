@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 import numpy as np
@@ -7,6 +8,17 @@ from transformers import AutoTokenizer
 import onnxruntime as ort
 
 app = FastAPI()
+origins = [
+    "https://sentimentanalyzer-ten.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,      # or ["*"] for all origins (less secure)
+    allow_credentials=True,
+    allow_methods=["*"],        # GET, POST, etc.
+    allow_headers=["*"],        # allow all headers
+)
 session = ort.InferenceSession("sequence_classifier.onnx")
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
