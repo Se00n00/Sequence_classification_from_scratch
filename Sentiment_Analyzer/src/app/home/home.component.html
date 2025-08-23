@@ -1,0 +1,122 @@
+<div class="h-full flex flex-col" >
+  <!-- <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Sentiment Analyzer</h1> -->
+
+  <div class="flex justify-end">
+    <div class="[box-shadow:inset_5px_5px_0px_rgba(0,0,0,0.7)] w-max rounded-lg p-[2px]">
+      
+      <!-- Click Button  -->
+      <div (click)="toggleInputType()" (mousedown)="isButtonPressed.set(true)" (mouseup)="isButtonPressed.set(false)" [class.pressed]="isButtonPressed()" class="border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-md w-max rounded-md">
+        <img [src]="inputTypeService.activeInputType() === 'text' ? 'icons/key.svg' : 'icons/docs.svg'" class="h-8 opacity-40 cursor-pointer transition-all" alt="send">
+        <!-- {{ activeInputType === 'text' ? 'Switch to File Input' : 'Switch to Text Input' }} -->
+      </div>
+    </div>
+  </div>
+
+  
+
+  @if (inputTypeService.activeInputType() === 'text') {
+    @if(inputText === ''){
+      <div class="text-center text-black/[0.7]">Analyze Sentiment of Your text</div>
+    }
+    <div class="flex-grow flex-col justify-center items-center overflow-auto">
+      <div class="flex justify-center">
+        <div class="flex justify-center items-center w-full sm:w-10/12 lg:w-9/12">
+          <canvas #densityPlotCanvas id="density-plot" class=""></canvas>
+        </div>
+      </div>
+    
+    </div>
+    
+    <div class="flex justify-center">
+      <div class="w-full sm:w-10/12 lg:w-9/12">
+        
+        <div class="relative flex gap-1 justify-center items-center">
+          @if (apiResponse()) {
+            <div class="border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] backdrop-blur-xs border rounded-md">
+             <div class="text-black/[0.3] text-sm p-2" [ngClass]="sentiment === 'Negative' ? 'bg-red-500/[0.2]' : 'bg-green-500/[0.2]'">
+                {{ (Math.max(softmaxResponse()![0], softmaxResponse()![1]) * 100).toFixed(2) }}
+              </div>
+            </div>
+          }
+          <input type="text" [(ngModel)]="inputText" (keydown.enter)="submitText()" class="w-full text-sm text-black/[0.6] p-2 border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-xs border focus:outline-none focus:ring-0  rounded-md" [class.bg-red-500/[0.1]]="feedbackMessage()" placeholder="Enter text">
+          <img src="icons/send.svg" class="rotate-90 absolute right-3 h-10 cursor-pointer hover:scale-[0.90] transition-all" alt="send" (click)="submitText()">
+          
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (inputTypeService.activeInputType() === 'file') {
+    <div class="p-6 rounded-lg max-w-2xl mx-auto mb-8 overflow-scroll">
+      @if(sheets().length == 0){
+        <div class="border-black/[0.1] rounded-lg p-8 text-center" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onFileDrop($event)">
+          <h2 class="text-xl  text-black/[0.4] mb-4">Drag and drop your file here</h2>
+          <p class="text-gray-500 mb-4">or</p>
+          <input type="file" (change)="onFileSelected($event)" accept=".xlsx,.xls,.sql" class="hidden" #fileInput/>
+          <button (click)="fileInput.click()" class="border border-black/[0.1] bg-black/[0.1] cursor-pointer text-sm px-2 py-1  rounded-md hover:bg-black hover:text-white transition duration-300">
+            Select File
+          </button>
+        </div>
+      }
+      
+      
+      @if (sheets().length > 0) {
+        <div class="mt-4 w-full sm:flex h-96" (keydown)="handleKeyDown($event)" tabindex="0">
+          <div class="w-50 lg:w-50">
+            @for (sheet of sheets(); track sheet) {
+              <div (click)="selectSheet(sheet)" 
+                   [ngClass]="{'text-black': selectedSheet() === sheet,'text-black/[0.5]':selectedSheet()!== sheet}" 
+                   class="relative p-2 cursor-pointer text-black/[0.5] text-sm">
+                   <div class="absolute -left-3">{{selectedSheet() === sheet? ">": " "}}</div>
+                {{sheet}}
+              </div>
+            }
+          </div>
+          <div class="w-max">
+            <div class="flex items-center mb-2">
+              <div class="ml-auto flex gap-2">
+                <div class="[box-shadow:inset_5px_5px_0px_rgba(0,0,0,0.7)] w-max rounded-lg p-[2px]">
+                  <button (click)="previousColumn()" class="cursor-pointer border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-md w-7 rounded-md text-center text-black/[0.6]">&lt;</button>
+                </div>
+                
+                <div (click)="selectColumn(selectedColumnIndex())" [ngClass]="{'bg-gray-200': selectedColumnIndex() === selectedColumnIndex()}" class="w-40 lg:w-80 overflow-hidden text-nowrap rounded-md text-sm py-1 px-2 border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-black/[0.1] backdrop-blur-md">{{fileColumns()[selectedColumnIndex()]}}</div>
+                
+                <div class="[box-shadow:inset_5px_5px_0px_rgba(0,0,0,0.7)] w-max rounded-lg p-[2px]">
+                  <div (click)="nextColumn()" class="cursor-pointer border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-md w-7 rounded-md text-center text-black/[0.6]">&gt;</div>
+                </div>
+              </div>
+            </div>
+            
+            <ul class="flex-col ">
+              @for (data of selectedColumnData(); track $index) {
+                
+                @if (data && $index<5) {
+                  <div class="flex items-center mb-1">
+                    <div class=" text-nowrap rounded-md text-sm py-1 px-2 border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-md flex-grow">{{data}}</div>
+                    @if (batchSentimentResponse().length > $index) {
+                      <div class="ml-2 border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] backdrop-blur-xs border rounded-md">
+                        <div class="text-black/[0.3] text-sm py-1 px-2 " [ngClass]="batchSentimentResponse()[$index].sentiment === 'Negative' ? 'bg-red-500/[0.2]' : 'bg-green-500/[0.2]'">
+                          {{ (batchSentimentResponse()[$index].score * 100).toFixed(2) }}%
+                        </div>
+                      </div>
+                    }
+                  </div>
+                }
+              }
+            </ul>
+          </div>
+
+          
+        </div>
+        <div class="flex justify-end gap-1">
+          
+          <div [routerLink]="['']" (click)="resetSignals()" class="text-xs cursor-pointer border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-md w-max rounded-md text-center text-black/[0.6] px-2 py-1">Back</div>
+          <button (click)="analyzeBatchSentiment()" class="text-xs cursor-pointer border border-black/[0.4] [box-shadow:2px_2px_0px_rgba(0,0,0,0.4)] bg-white/[0.1] backdrop-blur-md w-max rounded-md text-center text-black/[0.6] px-2 py-1">Analyze</button>
+          
+          
+        </div>
+      }
+    </div>
+  }
+</div>
+

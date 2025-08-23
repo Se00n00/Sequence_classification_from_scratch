@@ -16,7 +16,7 @@ Sentiment_Analyzer/no
 /bazel-out
 
 # Node
-/node_modules
+Sentiment_Analyzer/node_modules
 npm-debug.log
 yarn-error.log
 

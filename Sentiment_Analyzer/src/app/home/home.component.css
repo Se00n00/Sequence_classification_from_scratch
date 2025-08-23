@@ -1,0 +1,4 @@
+.pressed {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
+}

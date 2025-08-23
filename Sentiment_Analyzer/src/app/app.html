@@ -1,0 +1,37 @@
+<div class=" w-11/12 sm:w-10/12 lg:w-8/12 flex flex-col justify-center items-center">
+  
+  <div class="relative flex-1 flex flex-col w-[100%] p-5 border-2 border-black rounded-2xl shadow-[5px_6px_0px_rgba(0,0,0,0.7)]">
+    
+    <!-- Background divs  -->
+    <div class="absolute inset-0 bg-[radial-gradient(#00000080_1px,transparent_0)] bg-[size:30px_30px] -z-10" [ngClass]="inputTypeService.activeInputType() === 'text' ? 'opacity-100' : 'opacity-0'" style="transition: opacity 0.5s ease-in-out;"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle,transparent_0%,white_70%)] -z-10 opacity-100" style="transition: opacity 0.5s ease-in-out;"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:2rem_2rem] -z-10" [ngClass]="inputTypeService.activeInputType() === 'file' ? 'opacity-100' : 'opacity-0'" style="transition: opacity 0.5s ease-in-out;"></div>
+
+
+    <!-- navbar -->
+    <div class="flex gap-2 items-center">
+      <!-- navbar - slide button  -->
+      <div class="border-2 [box-shadow:inset_5px_5px_0px_rgba(0,0,0,0.7)] w-max rounded-lg">
+        <img src="icons/icon.svg" class="h-10 w-10 p-1" alt=" ">
+      </div>
+      <div class=" rounded-lg flex items-center">
+        <div class="flex items-center gap-2">
+          <div class="h-2 w-2 rounded-full flex justify-between items-center" [ngClass]="status() === 'live' ? 'bg-green-500' : 'bg-yellow-500'">
+            <div class="h-2 w-2 rounded-full animate-ping" [ngClass]="status() === 'live' ? 'bg-green-500' : 'bg-yellow-500'"></div>
+          </div>
+          <p class="text-xs text-black/[0.2]">{{ status() === 'live' ? ' ' : 'Waking up, usually takes a few minutes'}}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex-1 flex">
+      <div class="min-h-60 lg:min-h-80 flex-1">
+        
+        <router-outlet/>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+

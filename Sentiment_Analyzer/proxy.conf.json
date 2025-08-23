@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://sequence-classification-from-scratch.onrender.com",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

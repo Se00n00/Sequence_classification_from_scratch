@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.css"],
+  "sourcesContent": [".glowing {\n  animation: glow 1.5s infinite alternate;\n}\n\n@keyframes glow {\n  from {\n    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00f, 0 0 20px #00f, 0 0 25px #00f, 0 0 30px #00f, 0 0 35px #00f;\n  }\n  to {\n    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00f, 0 0 40px #00f, 0 0 50px #00f, 0 0 60px #00f, 0 0 70px #00f;\n  }\n}"],
+  "mappings": ";AAAA,CAAA;AACE,aAAA,KAAA,KAAA,SAAA;AACF;AAEA,WAHE;AAIA;AACE;MAAA,EAAA,EAAA,IAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA;AACF;AACA;AACE;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA,IAAA;MAAA,EAAA,EAAA,KAAA;AACF;AACF;",
+  "names": []
+}
