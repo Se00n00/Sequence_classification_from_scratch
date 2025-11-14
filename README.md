@@ -1,4 +1,4 @@
-<div align="center"><img src="logo_sentiment.svg"></div>
+<div align="center"><img src="logo_sentiment.png"></div>
 
 <div align="center">
   
@@ -9,8 +9,10 @@
 # Transformer from Scratch for Emotion Classification
 
 <div align="center">
-  <img src="demo.svg">
+  <img src="demo.gif">
 </div>
+
+---
 
 This repository demonstrates a **Transformer-Encoder-based sequence classification model built from scratch** in PyTorch. The model is pre-trained on the [`tweet_eval`](https://huggingface.co/datasets/tweet_eval) dataset for **emotion classification**, including labels like *anger, joy, optimism, sadness, fear,* and *love*.
 
