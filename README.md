@@ -1,9 +1,20 @@
+<div align="center"><img src="logo_sentiment.svg"></div>
+
+<div align="center">
+  
+![wandb](https://img.shields.io/badge/wandb-0.15.4-blue)  ![torch](https://img.shields.io/badge/torch-2.1.0-red) ![transformers](https://img.shields.io/badge/transformers-4.34.0-purple)  ![datasets](https://img.shields.io/badge/datasets-2.14.0-green)  
+</div>
+
+
 # Transformer from Scratch for Emotion Classification
 
-This repository demonstrates a **Transformer-based sequence classification model built from scratch** in PyTorch. The model is pre-trained on the [`tweet_eval`](https://huggingface.co/datasets/tweet_eval) dataset for **emotion classification**, including labels like *anger, joy, optimism, sadness, fear,* and *love*.
+<div align="center">
+  <img src="demo.svg">
+</div>
+
+This repository demonstrates a **Transformer-Encoder-based sequence classification model built from scratch** in PyTorch. The model is pre-trained on the [`tweet_eval`](https://huggingface.co/datasets/tweet_eval) dataset for **emotion classification**, including labels like *anger, joy, optimism, sadness, fear,* and *love*.
 
 Further, this model is fine-tuned on the [`Amazaon Review Sentiment`](https://huggingface.co/datasets/hungnm/multilingual-amazon-review-sentiment-processed) dataset for **binary classification** including labels as *negative and positive*
-### Live Demo [[WEB](https://sentimentanalyzer-ten.vercel.app/)]  [[API](https://sequence-classification-from-scratch.onrender.com)]
 
 ---
 
