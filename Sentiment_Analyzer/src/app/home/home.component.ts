@@ -153,7 +153,7 @@ export class HomeComponent {
     this.batchSentimentResponse.set([]); // Clear previous results
 
     const requests = texts.map(text =>
-      this.http.post<any>('https://sequence-classification-from-scratch.onrender.com/predict', { review: String(text) }) // Send one by one
+      this.http.post<any>('https://sentiment-analyzer-hm69.onrender.com/predict', { review: String(text) }) // Send one by one
     );
 
     forkJoin(requests).subscribe({
@@ -199,7 +199,7 @@ export class HomeComponent {
       return;
     }
 
-    this.http.post<any>('https://sequence-classification-from-scratch.onrender.com/predict', { review: String(text) }).subscribe({
+    this.http.post<any>('https://sentiment-analyzer-hm69.onrender.com/predict', { review: String(text) }).subscribe({
       next: (response) => {
         // Assuming response is { Negative: score, Positive: score } or { predictions: [{ Negative: score, Positive: score }] }
         let item: any;
