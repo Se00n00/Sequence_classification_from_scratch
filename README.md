@@ -2,15 +2,46 @@
 
 <div align="center">
   
-![wandb](https://img.shields.io/badge/wandb-0.15.4-blue)  ![torch](https://img.shields.io/badge/torch-2.1.0-red) ![transformers](https://img.shields.io/badge/transformers-4.34.0-purple)  ![datasets](https://img.shields.io/badge/datasets-2.14.0-green)  
+![wandb](https://img.shields.io/badge/wandb-0.15.4-blue)  ![torch](https://img.shields.io/badge/torch-2.1.0-red) ![transformers](https://img.shields.io/badge/transformers-4.34.0-purple)  ![datasets](https://img.shields.io/badge/datasets-2.14.0-green) 
+
+<!-- Tweet Dataset Badges -->
+![Tweet Training](https://img.shields.io/badge/Tweets-From_Scratch-orange)
+![Tweet Accuracy](https://img.shields.io/badge/Accuracy-65.5%25-blue)
+![Tweet F1](https://img.shields.io/badge/F1_Score-60.3%25-blueviolet)
+
+<!-- Amazon Dataset Badges -->
+![Amazon Training](https://img.shields.io/badge/Amazon-Fine_tuned-green)
+![Amazon Accuracy](https://img.shields.io/badge/Accuracy-89.1%25-brightgreen)
+![Amazon F1](https://img.shields.io/badge/F1_Score-88.8%25-success)
+
 </div>
 
 
 # Transformer from Scratch for Emotion Classification
 
 <div align="center">
-  <img src="demo.gif">
+  <a href="https://www.youtube.com/watch?v=Nl3SReW8KgY">
+    <img src="demo.gif">
+  </a>
+  
 </div>
+
+<div align="center">
+  Click to view Demo video on youtube
+</div>
+
+---
+
+## Content Navigation
+
+- [Project Overview](#transformer-from-scratch-for-emotion-classification)  
+- [Project Structure](#project-structure)  
+- [Model Overview](#model-overview)  
+- [Dataset](#dataset)  
+- [Training & Fine-tuning](#training--fine-tuning)  
+- [Model Performance](#model-performance)  
+- [API Usage](#api-usage)
+
 
 ---
 
@@ -41,7 +72,7 @@ Further, this model is fine-tuned on the [`Amazaon Review Sentiment`](https://hu
 
 ## Model Overview
 
-The model `Transformer_For_Sequence_Classification2` is a custom implementation resembling the BERT architecture, composed of:
+The model [`Transformer_For_Sequence_Classification2`](Architectures/Basic_Sequence_classification.py) is a custom implementation resembling the BERT architecture, composed of:
 
 - **Token Embedding**: Converts token IDs to dense vectors.
 - **Positional Encoding**: Adds sequence order information.
@@ -49,7 +80,7 @@ The model `Transformer_For_Sequence_Classification2` is a custom implementation 
 - **Dropout Layer**
 - **Classification Head**: Maps pooled embedding to 6 emotion classes.
 
-You can find the individual building blocks in the `layers/` directory.
+You can find the individual building blocks in the [`layers/`](layers) directory.
 
 ---
 
@@ -68,8 +99,8 @@ dataset = load_dataset("tweet_eval", "emotion")
 
 Use the provided notebooks:
 
-- `fine_tune.ipynb`: Fine-tune the model on the `tweet_eval` dataset.
-- `trainer.ipynb`: Contains the training loop, evaluation, and logging.
+- `trainer.ipynb`: Contains the training loop, evaluation, and logging. See More in [Notebook](trainer.ipynb)
+- `fine_tune.ipynb`: Fine-tune the model on the `tweet_eval` dataset. See More in [Notebook](finetune.ipynb)
 
 You can save the model using:
 
@@ -77,18 +108,28 @@ You can save the model using:
 torch.save(model.state_dict(), "best_model.pt")
 ```
 
+## Model Performance
+
+| Dataset            | Training Type | Accuracy | F1-Score |
+|--------------------|---------------|----------|----------|
+| Tweet Dataset      | From Scratch  | 65.5%    | 60.3%    |
+| Amazon Reviews     | Fine-tuned    | 89.1%    | 88.8%    |
+
+**Overall improvement in customer sentiment analysis efficiency: +28.5%**
+
+
 ## API Usage
 
-Check if API is Healthy
+Check if API is Healthy - Don't Misuse it
 ```bash
-curl -X GET https://sequence-classification-8jnb.onrender.com
+curl -X GET https://sentiment-analyzer-hm69.onrender.com
 ```
 ```bash
 {"message":"Sentiment analysis model is up and running! Have a great Day XD"}%                                     
 ```
 Example Usage
 ```bash
-curl -X POST https://sequence-classification-8jnb.onrender.com/predict \
+curl -X POST https://sentiment-analyzer-hm69.onrender.com/predict \
   -H "Content-Type: application/json" \
   -d '{"review": "This product is amazing!"}'
 ```
